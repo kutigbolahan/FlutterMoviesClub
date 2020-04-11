@@ -17,17 +17,20 @@ class Login extends StatelessWidget {
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.all(10),
-                child: Image.asset(
-                  'assets/images/video1.png',
-                  height: 150,
-                  width: 150,
+                child: Hero(
+                  tag: 1,
+                                  child: Image.asset(
+                    'assets/images/video1.png',
+                    height: 150,
+                    width: 150,
+                  ),
                 ),
               ),
               Center(
                 child: Text('Movie Club',
                 style: GoogleFonts.montserrat(
                   fontSize: 40,
-                  fontWeight: FontWeight.w400
+                  //fontWeight: FontWeight.w400
                 ),
                 ),
               ),

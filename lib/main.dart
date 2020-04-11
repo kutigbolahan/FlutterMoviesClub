@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moviesclub/screens/login/login.dart';
+import 'package:moviesclub/screens/splash_screen.dart';
 import 'package:moviesclub/utils/theme.dart';
 void main() {
   runApp(MyApp());
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: MyTheme().buildTheme(),
-      home: Login(),
+      home: SplashScreen(),
     );
   }
 }
