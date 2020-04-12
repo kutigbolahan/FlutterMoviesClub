@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:moviesclub/screens/login/login.dart';
+
 import 'package:moviesclub/screens/splash_screen.dart';
 import 'package:moviesclub/utils/theme.dart';
 void main() {

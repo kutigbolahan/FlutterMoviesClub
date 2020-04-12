@@ -17,9 +17,9 @@ class MyLoginForm extends StatelessWidget {
             child: Text(
               'Login',
               style: GoogleFonts.montserrat(
-                color: Color.fromRGBO(0, 109, 142, 0.2),
-                fontSize: 20,
-                fontWeight: FontWeight.w900,
+                color:Colors.grey,// Color.fromRGBO(0, 109, 142, 0.2),
+                fontSize: 25,
+                fontWeight: FontWeight.normal,
               ),
             ),
           ),

@@ -18,9 +18,9 @@ class MySignUpForm extends StatelessWidget {
             child: Text(
               'Sign Up',
               style: GoogleFonts.montserrat(
-                color: Color.fromRGBO(0, 109, 142, 0.2),
+                color: Colors.grey,
                 fontSize: 20,
-                fontWeight: FontWeight.w900,
+                fontWeight: FontWeight.normal,
               ),
             ),
           ),

@@ -16,15 +16,13 @@ class SignUp extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      BackButton(
-                        
-                      ),
+                       
                     ],
                   ),
                   SizedBox(
-                    height: 40,
+                    height: 60,
                   ),
-                  MySignUpForm(),
+                 MySignUpForm(),
                 ],
               ))
         ],

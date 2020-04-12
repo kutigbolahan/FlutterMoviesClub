@@ -19,7 +19,7 @@ class Login extends StatelessWidget {
                 padding: EdgeInsets.all(10),
                 child: Hero(
                   tag: 1,
-                                  child: Image.asset(
+                  child: Image.asset(
                     'assets/images/video1.png',
                     height: 150,
                     width: 150,
@@ -27,11 +27,12 @@ class Login extends StatelessWidget {
                 ),
               ),
               Center(
-                child: Text('Movie Club',
-                style: GoogleFonts.montserrat(
-                  fontSize: 40,
-                  //fontWeight: FontWeight.w400
-                ),
+                child: Text(
+                  'Movie Club',
+                  style: GoogleFonts.montserrat(
+                    fontSize: 40,
+                    //fontWeight: FontWeight.w400
+                  ),
                 ),
               ),
               SizedBox(
