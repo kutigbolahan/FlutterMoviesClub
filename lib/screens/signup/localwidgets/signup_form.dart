@@ -1,13 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:moviesclub/screens/login/login.dart';
+import 'package:moviesclub/states/current_user.dart';
 
 
 
 import 'package:moviesclub/widgets/my_container.dart';
+import 'package:provider/provider.dart';
 
-class MySignUpForm extends StatelessWidget {
+class MySignUpForm extends StatefulWidget {
+  @override
+  _MySignUpFormState createState() => _MySignUpFormState();
+}
+
+class _MySignUpFormState extends State<MySignUpForm> {
   final _formKey = GlobalKey<FormState>();
+  TextEditingController _fullNameController =TextEditingController();
+  TextEditingController _emailController =TextEditingController();
+  TextEditingController _passwordController =TextEditingController();
+  TextEditingController _confirmpasswordController =TextEditingController();
+
+void _signUpUser(String email, String password, BuildContext context)async{
+    CurrentUser _currentUser = Provider.of<CurrentUser>(context, listen: false);
+    try {
+      if(await _currentUser.signUpUser(email, password)){
+        Navigator.pop(context);
+      }
+    } catch (e) {
+      print(e);
+    }
+}
+
   @override
   Widget build(BuildContext context) {
     return MyContainer(
@@ -29,6 +52,7 @@ class MySignUpForm extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 TextFormField(
+                  controller: _fullNameController,
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.person),
                       hintText: 'Full Name'),
@@ -37,6 +61,7 @@ class MySignUpForm extends StatelessWidget {
                   height: 20,
                 ),
                 TextFormField(
+                  controller: _emailController,
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.alternate_email),
                       hintText: 'E-Mail'),
@@ -45,6 +70,7 @@ class MySignUpForm extends StatelessWidget {
                   height: 20,
                 ),
                 TextFormField(
+                  controller: _passwordController,
                   obscureText: true,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
@@ -55,6 +81,7 @@ class MySignUpForm extends StatelessWidget {
                   height: 20,
                 ),
                 TextFormField(
+                  controller: _confirmpasswordController,
                   obscureText: true,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
@@ -75,7 +102,11 @@ class MySignUpForm extends StatelessWidget {
                             fontSize: 15),
                       ),
                     ),
-                    onPressed: () {}),
+                    onPressed: () {
+                      if(_passwordController.text == _confirmpasswordController.text){
+                        _signUpUser(_emailController.text,_passwordController.text, context);
+                      }
+                    }),
                     FlatButton(
                       onPressed: (){
                         Navigator.of(context).push(

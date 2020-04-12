@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "810881245348",
+    "firebase_url": "https://movies-club-410ae.firebaseio.com",
+    "project_id": "movies-club-410ae",
+    "storage_bucket": "movies-club-410ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:810881245348:android:59a3e21e9eedee70e90631",
+        "android_client_info": {
+          "package_name": "com.example.moviesclub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "810881245348-ptm3djpkgiqdd5b7adhv4hlbdp4j47mh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkDY2qVySEE3POyX6J8ZmhCSbue_xez1A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "810881245348-ptm3djpkgiqdd5b7adhv4hlbdp4j47mh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
