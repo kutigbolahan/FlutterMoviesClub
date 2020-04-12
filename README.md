@@ -1,4 +1,8 @@
 # moviesclub
+![Screenshot_20200411-215824](https://user-images.githubusercontent.com/43111810/79065404-ed400580-7ca7-11ea-8b7f-7aa8cfd189f0.png)
+![Screenshot_20200411-220103](https://user-images.githubusercontent.com/43111810/79065407-f03af600-7ca7-11ea-8aee-1e07bbce7337.png)
+![Screenshot_20200411-215815](https://user-images.githubusercontent.com/43111810/79065409-f29d5000-7ca7-11ea-80a3-e0310e68cf96.png)
+
 
 A new Flutter project.
 
