@@ -13,7 +13,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  Widget _getScreenId(){
+  Widget getScreenId(){
     return StreamBuilder<FirebaseUser>(
       stream: FirebaseAuth.instance.onAuthStateChanged,
       builder: (context, snapshot){
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: MyTheme().buildTheme(),
-        home: _getScreenId(),
+        home: getScreenId(),
       ),
     );
   }
