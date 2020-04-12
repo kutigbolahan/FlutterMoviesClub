@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/button_list.dart';
+import 'package:flutter_signin_button/button_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:moviesclub/screens/home/home.dart';
 import 'package:moviesclub/screens/signup/signup.dart';
@@ -6,6 +8,8 @@ import 'package:moviesclub/states/current_user.dart';
 
 import 'package:moviesclub/widgets/my_container.dart';
 import 'package:provider/provider.dart';
+
+enum LoginType { email, google }
 
 class MyLoginForm extends StatefulWidget {
   @override
@@ -18,11 +22,25 @@ class _MyLoginFormState extends State<MyLoginForm> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
-  void _loginUser(String email, String password, BuildContext context) async {
+  void _loginUser(
+      {LoginType type,
+      String email,
+      String password,
+      BuildContext context}) async {
     CurrentUser _currentUser = Provider.of<CurrentUser>(context, listen: false);
     try {
-      String _returnString =
-          await _currentUser.loginUserWithEmail(email, password);
+      String _returnString;
+
+      switch (type) {
+        case LoginType.email:
+          _returnString = await _currentUser.loginUserWithEmail(email, password);
+          break;
+        case LoginType.google:
+          _returnString = await _currentUser.loginGoogle();
+          break;
+        default:
+      }
+         
       if (_returnString == 'success') {
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => HomeScreen()));
@@ -89,9 +107,17 @@ class _MyLoginFormState extends State<MyLoginForm> {
                       ),
                     ),
                     onPressed: () {
-                      _loginUser(_emailController.text,
-                          _passwordController.text, context);
+                      _loginUser(
+                          type: LoginType.email,
+                          email: _emailController.text,
+                          password: _passwordController.text,
+                          context: context);
                     }),
+                Text('Or'),
+                SignInButton(Buttons.Google, onPressed: () {
+                  _loginUser(type: LoginType.google,
+                   context: context);
+                }),
                 FlatButton(
                   onPressed: () {
                     Navigator.of(context).push(
