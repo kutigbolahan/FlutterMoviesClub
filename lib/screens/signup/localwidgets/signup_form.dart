@@ -23,8 +23,15 @@ class _MySignUpFormState extends State<MySignUpForm> {
 void _signUpUser(String email, String password, BuildContext context)async{
     CurrentUser _currentUser = Provider.of<CurrentUser>(context, listen: false);
     try {
-      if(await _currentUser.signUpUser(email, password)){
+      String _returnString =await _currentUser.signUpUser(email, password);
+      if(_returnString =='success'){
         Navigator.pop(context);
+      }else{
+        Scaffold.of(context).showSnackBar(SnackBar
+                        (content:
+                        Text(_returnString) ,
+                        duration: Duration(seconds:2),
+                        ));
       }
     } catch (e) {
       print(e);
@@ -52,6 +59,7 @@ void _signUpUser(String email, String password, BuildContext context)async{
             child: Column(
               children: <Widget>[
                 TextFormField(
+                 
                   controller: _fullNameController,
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.person),
@@ -105,6 +113,12 @@ void _signUpUser(String email, String password, BuildContext context)async{
                     onPressed: () {
                       if(_passwordController.text == _confirmpasswordController.text){
                         _signUpUser(_emailController.text,_passwordController.text, context);
+                      }else{
+                        Scaffold.of(context).showSnackBar(SnackBar
+                        (content:
+                        Text('Passwords do not match') ,
+                        duration: Duration(seconds:2),
+                        ));
                       }
                     }),
                     FlatButton(
