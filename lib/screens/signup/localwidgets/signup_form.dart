@@ -20,16 +20,16 @@ class _MySignUpFormState extends State<MySignUpForm> {
   TextEditingController _passwordController =TextEditingController();
   TextEditingController _confirmpasswordController =TextEditingController();
 
-void _signUpUser(String email, String password,String fullName, BuildContext context)async{
+void _signUpUser(String email, String password, BuildContext context, String fullName)async{
     CurrentUser _currentUser = Provider.of<CurrentUser>(context, listen: false);
     try {
       String _returnString =await _currentUser.signUpUser(email, password,fullName);
       if(_returnString =='success'){
-        Navigator.pop(context);
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
       }else{
         Scaffold.of(context).showSnackBar(SnackBar
                         (content:
-                        Text(_returnString) ,
+                        Text('registerd Successfully') ,
                         duration: Duration(seconds:2),
                         ));
       }
@@ -112,7 +112,7 @@ void _signUpUser(String email, String password,String fullName, BuildContext con
                     ),
                     onPressed: () {
                       if(_passwordController.text == _confirmpasswordController.text){
-                        _signUpUser(_emailController.text,_passwordController.text, _fullNameController.text, context);
+                        _signUpUser(_emailController.text,_passwordController.text, context, _fullNameController.text);
                       }else{
                         Scaffold.of(context).showSnackBar(SnackBar
                         (content:
