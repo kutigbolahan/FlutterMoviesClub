@@ -28,7 +28,7 @@ class MyTheme{
       buttonTheme: ButtonThemeData(
         buttonColor: _darkGrey,
         padding: EdgeInsets.symmetric(horizontal: 20),
-        minWidth: 200,
+        minWidth: 150,
         height: 40,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),

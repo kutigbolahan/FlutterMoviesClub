@@ -41,11 +41,13 @@ class CurrentUser extends ChangeNotifier {
       AuthResult _authResult = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
 
-      _currentUser.uid = _authResult.user.uid;
-      _currentUser.email = _authResult.user.email;
-      retVal = 'success';
-    } catch (e) {
+      _currentUser = await MyDatabase().getUserInfo(_authResult.user.uid);
+      if (_currentUser != null) {
+        retVal = 'success';
+      }
+    }  catch (e) {
       retVal = e.message;
+      print(e);
     }
     return retVal;
   }
@@ -74,8 +76,6 @@ class CurrentUser extends ChangeNotifier {
       if (_currentUser != null) {
         retVal = 'success';
       }
-    } on PlatformException catch (e) {
-      retVal = e.message;
     } catch (e) {
       retVal = e.message;
       print(e);
