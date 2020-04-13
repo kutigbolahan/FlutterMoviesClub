@@ -29,6 +29,7 @@ dependencies:
   provider:
   google_sign_in:
   flutter_signin_button: ^1.0.0
+  cloud_firestore:
 
 dev_dependencies:
   flutter_test:

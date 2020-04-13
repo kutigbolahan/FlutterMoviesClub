@@ -1,22 +1,28 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:moviesclub/models/user.dart';
+import 'package:moviesclub/services/database.dart';
 
 class CurrentUser extends ChangeNotifier {
-  String _uid;
-  String _email;
+  MyUser _currentUser = MyUser();
+
 //accessors for the _uid and _email
-  String get getUid => _uid;
-  String get getEmail => _email;
+  MyUser get getCurrentUser => _currentUser;
+  
 
   FirebaseAuth _auth = FirebaseAuth.instance;
 
-  Future<String> signUpUser(String email, String password) async {
+  Future<String> signUpUser(String email, String password,String fullName) async {
     String retVal = 'error';
+    MyUser _user = MyUser();
     try {
-      await _auth.createUserWithEmailAndPassword(
+    AuthResult _authResult =  await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-
+   _user.uid =_authResult.user.uid;
+   _user.email =_authResult.user.email;
+   _user.fullName = fullName ;
+MyDatabase().createUser(_user);
       retVal = 'success';
     } catch (e) {
       retVal = e.mesage;
@@ -30,8 +36,8 @@ class CurrentUser extends ChangeNotifier {
       AuthResult _authResult = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
 
-      _uid = _authResult.user.uid;
-      _email = _authResult.user.email;
+      _currentUser.uid = _authResult.user.uid;
+      _currentUser.email = _authResult.user.email;
       retVal = 'success';
     } catch (e) {
       retVal = e.message;
@@ -53,8 +59,8 @@ class CurrentUser extends ChangeNotifier {
 
       AuthResult _authResult = await _auth.signInWithCredential(credential);
 
-      _uid = _authResult.user.uid;
-      _email = _authResult.user.email;
+      _currentUser.uid = _authResult.user.uid;
+      _currentUser.email = _authResult.user.email;
       retVal = 'success';
     } catch (e) {
       retVal = e.message;
@@ -66,8 +72,7 @@ class CurrentUser extends ChangeNotifier {
     String retVal ='error'; 
     try {
       await _auth.signOut();
-      _uid =null;
-      _email = null;
+      _currentUser = MyUser();
       retVal ='success';
 
     } catch (e) {

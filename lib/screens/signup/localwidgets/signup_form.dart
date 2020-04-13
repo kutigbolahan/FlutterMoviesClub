@@ -20,10 +20,10 @@ class _MySignUpFormState extends State<MySignUpForm> {
   TextEditingController _passwordController =TextEditingController();
   TextEditingController _confirmpasswordController =TextEditingController();
 
-void _signUpUser(String email, String password, BuildContext context)async{
+void _signUpUser(String email, String password,String fullName, BuildContext context)async{
     CurrentUser _currentUser = Provider.of<CurrentUser>(context, listen: false);
     try {
-      String _returnString =await _currentUser.signUpUser(email, password);
+      String _returnString =await _currentUser.signUpUser(email, password,fullName);
       if(_returnString =='success'){
         Navigator.pop(context);
       }else{
@@ -112,7 +112,7 @@ void _signUpUser(String email, String password, BuildContext context)async{
                     ),
                     onPressed: () {
                       if(_passwordController.text == _confirmpasswordController.text){
-                        _signUpUser(_emailController.text,_passwordController.text, context);
+                        _signUpUser(_emailController.text,_passwordController.text, _fullNameController.text, context);
                       }else{
                         Scaffold.of(context).showSnackBar(SnackBar
                         (content:
