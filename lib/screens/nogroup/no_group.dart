@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:moviesclub/screens/creategroup/create_group.dart';
+import 'package:moviesclub/screens/joingroup/join_group.dart';
 
 class MyNoGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    void _goToJoin() {}
-    void _goToCreate() {}
+    void _goToJoin(BuildContext context) {
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>MyJoinGroup()));
+    }
+    void _goToCreate(BuildContext context) {
+       Navigator.push(context, MaterialPageRoute(builder: (context)=>MyCreateGroup()));
+    }
     return Scaffold(
       body: Column(
         children: <Widget>[
@@ -52,13 +58,13 @@ class MyNoGroup extends StatelessWidget {
                       'Create',
                       style: GoogleFonts.montserrat(),
                     ),
-                    onPressed: () {}),
+                    onPressed: ()=>_goToCreate(context)),
                 RaisedButton(
                     child: Text(
                       'Join',
                       style: GoogleFonts.montserrat(color: Colors.white),
                     ),
-                    onPressed: () {})
+                    onPressed: ()=>_goToJoin(context))
               ],
             ),
           )

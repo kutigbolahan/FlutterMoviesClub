@@ -6,11 +6,13 @@ class MyUser{
   String email;
   String fullName;
   Timestamp accountCreted;
+  String groupId;
 
   MyUser({
     this.uid,
     this.email,
     this.fullName,
-    this.accountCreted
+    this.accountCreted,
+    this.groupId,
   });
 }
