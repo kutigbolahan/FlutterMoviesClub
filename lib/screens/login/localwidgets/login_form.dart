@@ -76,6 +76,7 @@ class _MyLoginFormState extends State<MyLoginForm> {
             child: Column(
               children: <Widget>[
                 TextFormField(
+                  validator: (value)=> !value.contains('@') || value.isEmpty?'Please enter an email ':'',
                   controller: _emailController,
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.alternate_email),
@@ -85,6 +86,12 @@ class _MyLoginFormState extends State<MyLoginForm> {
                   height: 20,
                 ),
                 TextFormField(
+                   validator: (value){
+                             if (value.length <6 || value.isEmpty){
+                             return 'password must me more than 6';
+                             }
+                             return 'password must me more than 6';
+                  },
                   controller: _passwordController,
                   obscureText: true,
                   keyboardType: TextInputType.number,
