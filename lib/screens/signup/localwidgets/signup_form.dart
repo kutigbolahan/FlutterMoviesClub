@@ -29,12 +29,13 @@ void _signUpUser(String email, String password, BuildContext context, String ful
       }else{
         Scaffold.of(context).showSnackBar(SnackBar
                         (content:
-                        Text('registerd Successfully') ,
+                        Text('registeration UnSuccessful') ,
                         duration: Duration(seconds:2),
                         ));
       }
     } catch (e) {
       print(e);
+      return e.message;
     }
 }
 
@@ -59,7 +60,7 @@ void _signUpUser(String email, String password, BuildContext context, String ful
             child: Column(
               children: <Widget>[
                 TextFormField(
-                 
+                 validator: (value)=> value.isEmpty  ?'Please add a name': '',
                   controller: _fullNameController,
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.person),
@@ -69,6 +70,7 @@ void _signUpUser(String email, String password, BuildContext context, String ful
                   height: 20,
                 ),
                 TextFormField(
+                  validator: (value)=> !value.contains('@') ?'Please enter an email ':'',
                   controller: _emailController,
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.alternate_email),
@@ -78,6 +80,12 @@ void _signUpUser(String email, String password, BuildContext context, String ful
                   height: 20,
                 ),
                 TextFormField(
+                  validator: (value){
+                             if (value.length <6) {
+                             return 'password must me more than 6';
+                             }
+                             return 'password must me more than 6';
+                  },
                   controller: _passwordController,
                   obscureText: true,
                   keyboardType: TextInputType.number,
