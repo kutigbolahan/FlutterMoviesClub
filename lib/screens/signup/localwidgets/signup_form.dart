@@ -30,7 +30,7 @@ void _signUpUser(String email, String password, BuildContext context, String ful
         Scaffold.of(context).showSnackBar(SnackBar
                         (content:
                         Text('registeration UnSuccessful') ,
-                        duration: Duration(seconds:2),
+                        duration: Duration(seconds:4),
                         ));
       }
     } catch (e) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,31 +23,38 @@ class _MyLoginFormState extends State<MyLoginForm> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
-  void _loginUser(
-      {LoginType type,
+  
+
+  void _loginUser( {
+    LoginType type,
       String email,
       String password,
       BuildContext context}) async {
+         if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
     CurrentUser _currentUser = Provider.of<CurrentUser>(context, listen: false);
     try {
       String _returnString;
 
       switch (type) {
         case LoginType.email:
-          _returnString = await _currentUser.loginUserWithEmail(email, password);
+          _returnString =
+              await _currentUser.loginUserWithEmail(email, password);
           break;
         case LoginType.google:
           _returnString = await _currentUser.loginGoogle();
           break;
         default:
       }
-         
+
       if (_returnString == 'success') {
-        Navigator
-            .pushAndRemoveUntil(context,MaterialPageRoute(builder: (context) => HomeScreen()), (route)=> false);
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => HomeScreen()),
+            (route) => false);
       } else {
         Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text(_returnString),
+          content: Text('Login Unsuccessfull'),
           duration: Duration(seconds: 4),
         ));
       }
@@ -54,6 +62,7 @@ class _MyLoginFormState extends State<MyLoginForm> {
       print(e);
     }
   }
+      }
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +85,9 @@ class _MyLoginFormState extends State<MyLoginForm> {
             child: Column(
               children: <Widget>[
                 TextFormField(
-                  validator: (value)=> !value.contains('@') || value.isEmpty?'Please enter an email ':'',
+                  validator: (input) => !input.contains('@') || input.isEmpty
+                      ? 'Please enter an email '
+                      : '',
                   controller: _emailController,
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.alternate_email),
@@ -86,12 +97,6 @@ class _MyLoginFormState extends State<MyLoginForm> {
                   height: 20,
                 ),
                 TextFormField(
-                   validator: (value){
-                             if (value.length <6 || value.isEmpty){
-                             return 'password must me more than 6';
-                             }
-                             return 'password must me more than 6';
-                  },
                   controller: _passwordController,
                   obscureText: true,
                   keyboardType: TextInputType.number,
@@ -122,8 +127,7 @@ class _MyLoginFormState extends State<MyLoginForm> {
                     }),
                 Text('Or'),
                 SignInButton(Buttons.Google, onPressed: () {
-                  _loginUser(type: LoginType.google,
-                   context: context);
+                  _loginUser(type: LoginType.google, context: context);
                 }),
                 FlatButton(
                   onPressed: () {
