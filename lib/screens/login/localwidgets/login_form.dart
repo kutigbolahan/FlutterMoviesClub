@@ -29,39 +29,34 @@ class _MyLoginFormState extends State<MyLoginForm> {
       String email,
       String password,
       BuildContext context}) async {
-    if (_formKey.currentState.validate()) {
-      _formKey.currentState.save();
-      CurrentUser _currentUser =
-          Provider.of<CurrentUser>(context, listen: false);
-      try {
-        String _returnString;
+    CurrentUser _currentUser = Provider.of<CurrentUser>(context, listen: false);
+    try {
+      String _returnString;
 
-        switch (type) {
-          case LoginType.email:
-            _returnString =
-                await _currentUser.loginUserWithEmail(email, password);
-            break;
-          case LoginType.google:
-            _returnString = await _currentUser.loginGoogle();
-            break;
-          default:
-        }
-
-        if (_returnString == 'success') {
-          
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => GetScreenId()),
-              (route) => false);
-        } else {
-          Scaffold.of(context).showSnackBar(SnackBar(
-            content: Text(_returnString),
-            duration: Duration(seconds: 4),
-          ));
-        }
-      } catch (e) {
-        print(e);
+      switch (type) {
+        case LoginType.email:
+          _returnString =
+              await _currentUser.loginUserWithEmail(email, password);
+          break;
+        case LoginType.google:
+          _returnString = await _currentUser.loginGoogle();
+          break;
+        default:
       }
+
+      if (_returnString == 'success') {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => GetScreenId()),
+            (route) => false);
+      } else {
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text(_returnString),
+          duration: Duration(seconds: 4),
+        ));
+      }
+    } catch (e) {
+      print(e);
     }
   }
 
@@ -120,8 +115,8 @@ class _MyLoginFormState extends State<MyLoginForm> {
                       ),
                     ),
                     onPressed: () {
+                      _showToast(context);
                       _loginUser(
-                        
                           type: LoginType.email,
                           email: _emailController.text,
                           password: _passwordController.text,
@@ -152,4 +147,18 @@ class _MyLoginFormState extends State<MyLoginForm> {
       ),
     );
   }
+   void _showToast(BuildContext context) {
+    final scaffold = Scaffold.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+       
+        content: Row(
+          children: <Widget>[CircularProgressIndicator(),
+          SizedBox(width: 20,),
+           Text('Logining')],
+        ),
+      ),
+    );
+  }
 }
+
