@@ -14,7 +14,7 @@ class MySignUpForm extends StatefulWidget {
 }
 
 class _MySignUpFormState extends State<MySignUpForm> {
-  final _formKey = GlobalKey<FormState>();
+  final _formKe = GlobalKey<FormState>();
   TextEditingController _fullNameController =TextEditingController();
   TextEditingController _emailController =TextEditingController();
   TextEditingController _passwordController =TextEditingController();
@@ -56,7 +56,7 @@ void _signUpUser(String email, String password, BuildContext context, String ful
             ),
           ),
           Form(
-            key: _formKey,
+            key: _formKe,
             child: Column(
               children: <Widget>[
                 TextFormField(

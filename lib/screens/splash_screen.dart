@@ -19,26 +19,28 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(98.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Hero(tag: 1,
-             child: Image.asset(
-                    'assets/images/video1.png',
-                    height: 150,
-                    width: 150,
-                  ),
-            
-            ),
-            SizedBox(height: 10,),
-            Text('MOVIE CLUB',
-            textAlign: TextAlign.center,
-            style: GoogleFonts.montserrat(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w400
-                ),)
-          ],
+        child: SingleChildScrollView(
+                  child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Hero(tag: 1,
+               child: Image.asset(
+                      'assets/images/video1.png',
+                      height: 150,
+                      width: 150,
+                    ),
+              
+              ),
+              SizedBox(height: 10,),
+              Text('MOVIE CLUB',
+              textAlign: TextAlign.center,
+              style: GoogleFonts.montserrat(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w400
+                  ),)
+            ],
+          ),
         ),
       ),
     );

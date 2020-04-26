@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:moviesclub/getscreenid.dart';
 import 'package:moviesclub/screens/home/home.dart';
 import 'package:moviesclub/screens/signup/signup.dart';
 import 'package:moviesclub/states/current_user.dart';
@@ -50,7 +51,7 @@ class _MyLoginFormState extends State<MyLoginForm> {
           
           Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => HomeScreen()),
+              MaterialPageRoute(builder: (context) => GetScreenId()),
               (route) => false);
         } else {
           Scaffold.of(context).showSnackBar(SnackBar(
