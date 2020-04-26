@@ -4,7 +4,7 @@ import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:moviesclub/getscreenid.dart';
-import 'package:moviesclub/screens/home/home.dart';
+
 import 'package:moviesclub/screens/signup/signup.dart';
 import 'package:moviesclub/states/current_user.dart';
 
@@ -81,9 +81,8 @@ class _MyLoginFormState extends State<MyLoginForm> {
             child: Column(
               children: <Widget>[
                 TextFormField(
-                  // validator: (input) => !input.contains('@') || input.isEmpty
-                  //     ? 'Please enter an email '
-                  //     : CircularProgressIndicator(),
+                   autovalidate: true,
+                  validator: EmailValidator.validate,
                   controller: _emailController,
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.alternate_email),
@@ -124,6 +123,7 @@ class _MyLoginFormState extends State<MyLoginForm> {
                     }),
                 Text('Or'),
                 SignInButton(Buttons.Google, onPressed: () {
+                  _showToast(context);
                   _loginUser(type: LoginType.google, context: context);
                 }),
                 FlatButton(

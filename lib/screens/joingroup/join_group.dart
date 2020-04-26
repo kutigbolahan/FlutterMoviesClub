@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:moviesclub/getscreenid.dart';
+
 import 'package:moviesclub/screens/home/home.dart';
 import 'package:moviesclub/services/database.dart';
 import 'package:moviesclub/states/current_user.dart';
@@ -13,12 +13,24 @@ class MyJoinGroup extends StatefulWidget {
 }
 
 class _MyJoinGroupState extends State<MyJoinGroup> {
+  
   void _joinGroup(BuildContext context,String groupId)async{
-     CurrentUser _currentUser = Provider.of<CurrentUser>(context, listen: false);
+    try {
+       CurrentUser _currentUser = Provider.of<CurrentUser>(context, listen: false);
    String _returnString = await MyDatabase().joinGroup(groupId, _currentUser.getCurrentUser.uid);
   if (_returnString == 'success') {
     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>HomeScreen()), (route) => false);
-  }
+  }else {
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text(_returnString),
+          duration: Duration(seconds: 4),
+        ));
+      }
+    } catch (e) {
+      print(e);
+    return  e.message;
+    }
+    
  
   }
   TextEditingController _groupIdController = TextEditingController();

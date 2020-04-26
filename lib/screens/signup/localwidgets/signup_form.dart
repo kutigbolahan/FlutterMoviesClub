@@ -13,7 +13,7 @@ class MySignUpForm extends StatefulWidget {
 }
 
 class _MySignUpFormState extends State<MySignUpForm> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  
   final _formKey = GlobalKey<FormState>();
   TextEditingController _fullNameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
@@ -120,14 +120,7 @@ class _MySignUpFormState extends State<MySignUpForm> {
                     ),
                   ),
                   onPressed: () {
-                    // _scaffoldKey.currentState.showSnackBar(SnackBar(
-                    //   content: Row(
-                    //     children: <Widget>[
-                    //       CircularProgressIndicator(),
-                    //       Text('Signing In')
-                    //     ],
-                    //   ),
-                    // ));
+                    
                     _showToast(context);
                     if (_passwordController.text ==
                         _confirmpasswordController.text) {

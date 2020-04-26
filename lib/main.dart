@@ -13,10 +13,10 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp(),
-    //DevicePreview(
-    //builder: (context)=>MyApp(),
-    //enabled: !kReleaseMode,
-   // )
+  //   DevicePreview(
+  //   builder: (context)=>MyApp(),
+  //   enabled: !kReleaseMode,
+  //  )
     );
 }
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:moviesclub/getscreenid.dart';
+
 import 'package:moviesclub/screens/home/home.dart';
 import 'package:moviesclub/services/database.dart';
 import 'package:moviesclub/states/current_user.dart';
@@ -14,11 +14,21 @@ class MyCreateGroup extends StatefulWidget {
 
 class _MyCreateGroupState extends State<MyCreateGroup> {
   void _createGroup(BuildContext context,String groupName)async{
-     CurrentUser _currentUser = Provider.of<CurrentUser>(context,listen: false);
+    try {
+       CurrentUser _currentUser = Provider.of<CurrentUser>(context,listen: false);
    String _returnString = await MyDatabase().createGroup(groupName, _currentUser.getCurrentUser.uid);
   if (_returnString == 'success') {
     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>HomeScreen()), (route) => false);
-  }
+  }else {
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text(_returnString),
+          duration: Duration(seconds: 4),
+        ));
+      }
+    } catch (e) {
+      return e.message;
+    }
+    
  
   }
   TextEditingController _groupNameController = TextEditingController();
