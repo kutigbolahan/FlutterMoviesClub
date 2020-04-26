@@ -30,6 +30,7 @@ dependencies:
   google_sign_in:
   flutter_signin_button: ^1.0.0
   cloud_firestore:
+  device_preview: ^0.4.4
 
 dev_dependencies:
   flutter_test:

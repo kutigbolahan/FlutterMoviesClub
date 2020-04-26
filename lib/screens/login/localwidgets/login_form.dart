@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
+
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,46 +23,46 @@ class _MyLoginFormState extends State<MyLoginForm> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
-  
-
-  void _loginUser( {
-    LoginType type,
+  void _loginUser(
+      {LoginType type,
       String email,
       String password,
       BuildContext context}) async {
-         if (_formKey.currentState.validate()) {
+    if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-    CurrentUser _currentUser = Provider.of<CurrentUser>(context, listen: false);
-    try {
-      String _returnString;
+      CurrentUser _currentUser =
+          Provider.of<CurrentUser>(context, listen: false);
+      try {
+        String _returnString;
 
-      switch (type) {
-        case LoginType.email:
-          _returnString =
-              await _currentUser.loginUserWithEmail(email, password);
-          break;
-        case LoginType.google:
-          _returnString = await _currentUser.loginGoogle();
-          break;
-        default:
-      }
+        switch (type) {
+          case LoginType.email:
+            _returnString =
+                await _currentUser.loginUserWithEmail(email, password);
+            break;
+          case LoginType.google:
+            _returnString = await _currentUser.loginGoogle();
+            break;
+          default:
+        }
 
-      if (_returnString == 'success') {
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => HomeScreen()),
-            (route) => false);
-      } else {
-        Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text('Login Unsuccessfull'),
-          duration: Duration(seconds: 4),
-        ));
+        if (_returnString == 'success') {
+          
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => HomeScreen()),
+              (route) => false);
+        } else {
+          Scaffold.of(context).showSnackBar(SnackBar(
+            content: Text('Login Unsuccessfull'),
+            duration: Duration(seconds: 4),
+          ));
+        }
+      } catch (e) {
+        print(e);
       }
-    } catch (e) {
-      print(e);
     }
   }
-      }
 
   @override
   Widget build(BuildContext context) {
@@ -85,9 +85,9 @@ class _MyLoginFormState extends State<MyLoginForm> {
             child: Column(
               children: <Widget>[
                 TextFormField(
-                  validator: (input) => !input.contains('@') || input.isEmpty
-                      ? 'Please enter an email '
-                      : '',
+                  // validator: (input) => !input.contains('@') || input.isEmpty
+                  //     ? 'Please enter an email '
+                  //     : CircularProgressIndicator(),
                   controller: _emailController,
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.alternate_email),
@@ -120,6 +120,7 @@ class _MyLoginFormState extends State<MyLoginForm> {
                     ),
                     onPressed: () {
                       _loginUser(
+                        
                           type: LoginType.email,
                           email: _emailController.text,
                           password: _passwordController.text,

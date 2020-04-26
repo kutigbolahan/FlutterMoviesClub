@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:moviesclub/screens/login/login.dart';
+import 'package:moviesclub/getscreenid.dart';
+
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     Timer(Duration(seconds: 5), ()=> Navigator.of(context).pushReplacement(
-    MaterialPageRoute(builder: (context)=> Login())
+    MaterialPageRoute(builder: (context)=> GetScreenId())
     ));
     return Scaffold(
       body: Padding(
