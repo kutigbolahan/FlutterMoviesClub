@@ -55,7 +55,7 @@ class _MyLoginFormState extends State<MyLoginForm> {
               (route) => false);
         } else {
           Scaffold.of(context).showSnackBar(SnackBar(
-            content: Text('Login Unsuccessfull'),
+            content: Text(_returnString),
             duration: Duration(seconds: 4),
           ));
         }

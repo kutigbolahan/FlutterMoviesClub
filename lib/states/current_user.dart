@@ -30,6 +30,7 @@ class CurrentUser extends ChangeNotifier {
       }
     } catch (e) {
       print(e);
+      
       retVal = e.message;
     }
     return retVal;
@@ -47,7 +48,7 @@ class CurrentUser extends ChangeNotifier {
       }
     }  catch (e) {
       retVal = e.message;
-      print(e);
+     print(e);
     }
     return retVal;
   }
@@ -93,5 +94,47 @@ class CurrentUser extends ChangeNotifier {
       print(e);
     }
     return retVal;
+  }
+}
+
+
+class NameValidator {
+  static String validate(String value) {
+    if(value.isEmpty) {
+      return "Name can't be empty";
+    }
+    if(value.length < 2) {
+      return "Name must be at least 2 characters long";
+    }
+    if(value.length > 50) {
+      return "Name must be less than 50 characters long";
+    }
+    return null;
+  }
+}
+
+class EmailValidator {
+  static String validate(String value) {
+   
+                    if (!value.contains('@')) {
+                      return 'E-mail is invalid';
+                    } else if (!value.contains('.')) {
+                      return 'E-mail is invalid';
+                    }else if (value.isEmpty) {
+                      return 'E-mail cant be empty';
+                    }
+                    return null;
+                  }
+}
+
+class PasswordValidator {
+  static String validate(String value) {
+    if(value.isEmpty) {
+      return "Password can't be empty";
+    } else if (value.length < 6) {
+                      return 'password must me more than 6';
+                    }
+                    
+    return null;
   }
 }

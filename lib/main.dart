@@ -12,12 +12,15 @@ import 'package:moviesclub/utils/theme.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(DevicePreview(
-    builder: (context)=>MyApp(),
-    enabled: !kReleaseMode,
-    )
+  runApp(MyApp(),
+    //DevicePreview(
+    //builder: (context)=>MyApp(),
+    //enabled: !kReleaseMode,
+   // )
     );
 }
+
+
 
 class MyApp extends StatelessWidget {
  
