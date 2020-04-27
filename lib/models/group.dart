@@ -6,12 +6,16 @@ class MyGroup{
   String leader;
   List<String> members;
   Timestamp groupCreated;
+  String currentMovieId;
+  Timestamp currentMovieDue;
 
   MyGroup({
   this.id,
   this.name,
   this.leader,
   this.members,
-  this.groupCreated
+  this.groupCreated,
+  this.currentMovieId,
+  this.currentMovieDue
   });
 }
