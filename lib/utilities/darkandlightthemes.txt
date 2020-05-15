@@ -1,0 +1,111 @@
+
+//main
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_foodybite/screens/main_screen.dart';
+import 'package:flutter_foodybite/util/const.dart';
+
+
+void main() async{
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
+    runApp(MyApp());
+  });
+}
+
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool isDark = false;
+
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: isDark ? Constants.darkPrimary : Constants.lightPrimary,
+      statusBarIconBrightness: isDark?Brightness.light:Brightness.dark,
+    ));
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: Constants.appName,
+      theme: isDark ? Constants.darkTheme : Constants.lightTheme,
+      home: MainScreen(),
+    );
+  }
+}
+
+
+
+
+
+
+
+
+//second
+class Constants{
+
+  static String appName = "Flutter Travel";
+
+  //Colors for theme
+  static Color lightPrimary = Color(0xfffcfcff);
+  static Color darkPrimary = Colors.black;
+  static Color lightAccent = Colors.blueGrey[900];
+  static Color darkAccent = Colors.white;
+  static Color lightBG = Color(0xfffcfcff);
+  static Color darkBG = Colors.black;
+  static Color badgeColor = Colors.red;
+
+  static ThemeData lightTheme = ThemeData(
+    backgroundColor: lightBG,
+    primaryColor: lightPrimary,
+    accentColor:  lightAccent,
+    cursorColor: lightAccent,
+    scaffoldBackgroundColor: lightBG,
+    appBarTheme: AppBarTheme(
+      elevation: 0,
+      textTheme: TextTheme(
+        title: TextStyle(
+          color: darkBG,
+          fontSize: 18.0,
+          fontWeight: FontWeight.w800,
+        ),
+      ),
+//      iconTheme: IconThemeData(
+//        color: lightAccent,
+//      ),
+    ),
+  );
+
+  static ThemeData darkTheme = ThemeData(
+    brightness: Brightness.dark,
+    backgroundColor: darkBG,
+    primaryColor: darkPrimary,
+    accentColor: darkAccent,
+    scaffoldBackgroundColor: darkBG,
+    cursorColor: darkAccent,
+    appBarTheme: AppBarTheme(
+      elevation: 0,
+      textTheme: TextTheme(
+        title: TextStyle(
+          color: lightBG,
+          fontSize: 18.0,
+          fontWeight: FontWeight.w800,
+        ),
+      ),
+//      iconTheme: IconThemeData(
+//        color: darkAccent,
+//      ),
+    ),
+  );
+
+
+}

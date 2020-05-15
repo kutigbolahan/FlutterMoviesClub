@@ -1,0 +1,72 @@
+library timeago_flutter;
+
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:timeago/timeago.dart' as timeago;
+typedef Widget TimeagoBuilder(BuildContext context, String value);
+
+class Timeago extends StatefulWidget {
+  const Timeago({
+    Key key,
+    @required this.builder,
+    @required this.date,
+    this.locale,
+    this.allowFromNow,
+    this.clock,
+    this.refreshRate,
+  }) : super(key: key);
+
+  final TimeagoBuilder builder;
+  final DateTime date;
+  final DateTime clock;
+  final String locale;
+  final bool allowFromNow;
+  final Duration refreshRate;
+
+  @override
+  _TimeagoState createState() => _TimeagoState();
+}
+
+class _TimeagoState extends State<Timeago> {
+  Timer _timer;
+
+  @override
+  void initState() {
+    final refreshRate = widget.refreshRate ?? Duration(minutes: 1);
+    _timer = Timer.periodic(refreshRate, (Timer t) {
+      setState(() {});
+    });
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final formatted = timeago.format(widget.date,
+        locale: widget.locale,
+        clock: widget.clock,
+        allowFromNow: widget.allowFromNow);
+    return widget.builder(context, formatted);
+  }
+}
+
+
+// Timeago(
+                                  //   builder: (_, value) => Text(
+                                  //     value,
+                                  //     style: TextStyle(
+                                  //         fontSize: 10,
+                                  //         fontWeight: FontWeight.w100),
+                                  //   ),
+                                  //   refreshRate: Duration(minutes: 5),
+                                  //   date: DateTime.now().toLocal(),
+                                  //   allowFromNow: true,
+                                  //   // locale: locale
+                                  // ),

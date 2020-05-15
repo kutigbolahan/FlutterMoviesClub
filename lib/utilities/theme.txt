@@ -1,0 +1,74 @@
+import 'package:flutter/material.dart';
+
+
+final darkTheme = ThemeData(
+
+  primarySwatch: Colors.grey,
+
+  primaryColor: Colors.black,
+
+  brightness: Brightness.dark,
+
+  backgroundColor: Color(0xFF000000),
+
+  accentColor: Colors.white,
+
+  accentIconTheme: IconThemeData(color: Colors.black),
+
+  dividerColor: Colors.black54,
+
+);
+
+
+
+final lightTheme = ThemeData(
+
+  primarySwatch: Colors.grey,
+
+  primaryColor: Colors.white,
+
+  brightness: Brightness.light,
+
+  backgroundColor: Color(0xFFE5E5E5),
+
+  accentColor: Colors.black,
+
+  accentIconTheme: IconThemeData(color: Colors.white),
+
+  dividerColor: Colors.white54,
+
+);
+
+class ThemeChanger with ChangeNotifier{
+  
+   bool isdarkTheme;
+
+  ThemeChanger({this.isdarkTheme});
+
+  ThemeData get getThemeData => isdarkTheme ? darkTheme : lightTheme;
+
+ set setThemeData(bool val) {
+    if (val) {
+      isdarkTheme = true;
+    } else {
+      isdarkTheme = false;
+    }
+    notifyListeners();
+  }
+
+  
+}
+ChangeNotifierProvider<ThemeChanger>(
+          create: (context) => ThemeChanger(isdarkTheme: true),
+        ),
+
+theme: theme.getThemeData
+
+ Switch(
+         value: _themeChanger.isdarkTheme, 
+         onChanged: (value){
+        
+           _themeChanger.setThemeData =value;
+        
+
+       }),
