@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:moviesclub/models/user.dart';
-
+import 'package:moviesclub/models/group.dart';
+import 'package:moviesclub/models/movie.dart';
 //creating users as they sign up for the app
 class MyDatabase {
   final Firestore _firestore = Firestore.instance;
@@ -69,6 +70,41 @@ class MyDatabase {
 'groupId': groupId
      });
       retVal = 'success';
+    } catch (e) {
+      print(e);
+    }
+    return retVal;
+  }
+
+
+   Future<MyGroup> getGroupInfo(String groupId) async {
+    MyGroup retVal = MyGroup();
+    try {
+      DocumentSnapshot _docSnapshot =
+          await _firestore.collection('groups').document(groupId).get();
+      retVal.id = groupId;
+      retVal.name = _docSnapshot.data['name'];
+      retVal.leader = _docSnapshot.data['leader'];
+      retVal.members = List<String>.from( _docSnapshot.data['members']);
+      retVal.groupCreated = _docSnapshot.data['groupCreated'];
+      retVal.currentMovieId = _docSnapshot.data['currentMovieId'];
+      retVal.currentMovieDue = _docSnapshot.data['currentMovieDue'];
+    } catch (e) {
+      print(e);
+    }
+    return retVal;
+  }
+   Future<MyMovie> getCurrentMovie(String groupId, String movieId) async {
+    MyMovie retVal = MyMovie();
+    try {
+      DocumentSnapshot _docSnapshot =
+          await _firestore.collection('groups').document(groupId).collection('movies').document('bookId').get();
+      retVal.id = movieId;
+      retVal.name = _docSnapshot.data['name'];
+      retVal.length = _docSnapshot.data['length'];
+     
+      retVal.dateCompleted = _docSnapshot.data['dateCompleted'];
+     
     } catch (e) {
       print(e);
     }

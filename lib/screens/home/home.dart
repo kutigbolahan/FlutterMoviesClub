@@ -5,12 +5,28 @@ import 'package:moviesclub/states/current_user.dart';
 import 'package:moviesclub/widgets/my_container.dart';
 import 'package:moviesclub/screens/nogroup/no_group.dart';
 import 'package:provider/provider.dart';
+import 'package:moviesclub/states/current_group.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
 
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+  @override
+  void initState() {
+    
+    super.initState();
+    CurrentUser _currentUser =  Provider.of<CurrentUser>(context, listen: false);
+    CurrentGroup _currentGroup = Provider.of<CurrentGroup>(context,listen: false);
+  _currentGroup.updateStateFromDatabase(_currentUser.getCurrentUser.groupId);
+  }
   void _goToNoGroup(BuildContext context){
   Navigator.push(context, MaterialPageRoute(builder: (context)=> MyNoGroup()));
   }
+
   void _signOut(BuildContext context) async {
     CurrentUser _currentUser = Provider.of<CurrentUser>(context, listen: false);
     String _returnString = await _currentUser.signOut();
